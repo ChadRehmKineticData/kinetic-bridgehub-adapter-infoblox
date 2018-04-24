@@ -1,2 +1,2 @@
-# kinetic-bridgehub-adapter-chef
-A Kinetic Bridgehub adapter for Chef
+# kinetic-bridgehub-adapter-infoblox
+A Kinetic Bridgehub adapter for Infoblox
