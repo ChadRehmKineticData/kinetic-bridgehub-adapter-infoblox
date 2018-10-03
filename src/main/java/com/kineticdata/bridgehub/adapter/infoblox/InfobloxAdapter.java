@@ -292,7 +292,7 @@ public class InfobloxAdapter implements BridgeAdapter {
             throw new BridgeError("Error: Unable to parse JSON",e);
         }
         
-        List<Record> records = new ArrayList<>();
+        ArrayList<Record> records = new ArrayList<>();
         for (int i = 0; i<jsonArray.size(); i++) {
             JSONObject record = (JSONObject)jsonArray.get(i);
             JSONObject extensibleAttributes = null;
@@ -308,6 +308,20 @@ public class InfobloxAdapter implements BridgeAdapter {
                 }
             }
             records.add(new Record(data));
+        }
+        
+        // Sort records
+        if (request.getMetadata("order") == null) {
+            // name,type,desc assumes name ASC,type ASC,desc ASC
+            Map<String,String> defaultOrder = new LinkedHashMap<String,String>();
+            for (String field : fields) {
+                defaultOrder.put(field, "ASC");
+            }
+            records = InfobloxSortHelper.sortRecords(defaultOrder, records);
+        } else {
+            // Creates a map out of order metadata
+            Map<String,String> orderParse = BridgeUtils.parseOrder(request.getMetadata("order"));
+            records = InfobloxSortHelper.sortRecords(orderParse, records);
         }
 
         // Building the output metadata
