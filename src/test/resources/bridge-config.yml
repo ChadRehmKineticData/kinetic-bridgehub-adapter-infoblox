@@ -4,10 +4,10 @@
 Bridge Configuration:
     Username: ""
     Password: ""
-    VMWare Server URL: ""
+    Host: ""
 
 Test Request Configuration:
-    Structure: ""
+    Structure: "network"
     Fields: ""
     Single Value Query: ""
     Multiple Value Query: ""
